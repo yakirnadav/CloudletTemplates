@@ -1,8 +1,7 @@
-# Helm Chart Templates for Node.js in Kubernetes
+# Helm Chart Templates for deploying web application in cloudlet
 
-<a href='http://CloudNativeJS.io/'><img src='https://img.shields.io/badge/homepage-CloudNativeJS-blue.svg'></a>
 
-This project provides template Helm Charts for deploying a Node.js web application into any Kubernetes based cloud.
+This project provides template Helm Charts for deploying a  web application into any Kubernetes based cloud (Cloudlet).
 
 The templates require your application to built into a Docker image. The [Docker Templates](http://github.com/CloudNativeJS/docker) project provides assistance in creating an image for your application.
 
@@ -10,14 +9,10 @@ This project provides the following files:
 
 | File                                              | Description                                                           |
 |---------------------------------------------------|-----------------------------------------------------------------------|  
-| `/chart/nodeserver/Chart.yaml`                    | The definition file for your application                           | 
-| `/chart/nodeserver/values.yaml`                   | Configurable values that are inserted into the following template files      | 
-| `/chart/nodeserver/templates/basedeployment.yaml` | Template to configure your application deployment.                 |
-| `/chart/nodeserver/templates/deployment.yaml`     | Template to configure your application deployment.                 | 
-| `/chart/nodeserver/templates/service.yaml`        | Template to configure your application deployment.                 | 
-| `/chart/nodeserver/templates/hpa.yaml`            | Template to configure your application deployment.                 | 
-| `/chart/nodeserver/templates/istio.yaml`          | Template to configure your application deployment.                 | 
-| `/chart/nodeserver/templates/NOTES.txt`           | Helper to enable locating your application IP and PORT        | 
+| `/chart/webapp/Chart.yaml`                    | The definition file for your application                           | 
+| `/chart/webapp/values.yaml`                   | Configurable values that are inserted into the following template files      |        
+| `/chart/webapp/templates/deployment.yaml`     | Template to configure your application deployment.                 | 
+| `/chart/webapp/templates/service.yaml`        | Template to configure your application deployment.                 | 
 
 In order to use these template files, copy the files from this project into your application directory. You should only need to edit the `Chart.yaml` and `values.yaml` files.
 
