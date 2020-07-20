@@ -17,9 +17,6 @@ This project provides the following files:
 
 In order to use these template files, copy the files from this project into your application directory. You should only need to edit the `Chart.yaml` and `values.yaml` files.
 
-## Creating new application in specific cloudlet
-Before deploying new application for the first time in a specifit cloudlet, the follwoing pre-requisitst need to
-
 
 ## Configuring the Chart for your Application
 
@@ -34,5 +31,10 @@ The following table lists the configurable parameters of the template Helm chart
 | `service.type`             | Openshift service type exposing port                  | `NodePort`                                                 |
 | `service.port`             | TCP Port for this service                       | `3000` |
 | `service.dns`             | Host name for this service. The host will concaten to the openshift domain                    |`webapp` |
+| `service.tls`             | If you want ssl, define its termination type, otherwise leave that empty                 |`edge` |
 | `resources.limits.memory`  | Memory resource limits                          | `128m`                                                     |
 | `resources.limits.cpu`     | CPU resource limits                             | `100m`                                                     |
+
+## Steps for deploying new application in specific cloudlet using Helm-Charts
+### Creating new Application Instance 
+Before deploying new application for the first time in a specifit cloudlet, the follwoing pre-requisitst need to

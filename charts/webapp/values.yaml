@@ -13,3 +13,4 @@ service:
   type: NodePort
   servicePort: 3000
   dns: webapp
+  tls: edge

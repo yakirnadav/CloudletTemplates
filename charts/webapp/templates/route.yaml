@@ -12,8 +12,10 @@ spec:
     weight: 100
     port:
       targetPort: {{ .Values.service.servicePort }}-{{ .Values.service.servicePort }}
+      {{- if .Values.service.tls }}
       tls:
-        termination: edge
+        termination: {{ .Values.service.tls }}
         insecureEdgeTerminationPolicy: Allow
       wildcardPolicy: None
+      {{- end }}
       
