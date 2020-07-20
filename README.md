@@ -32,7 +32,7 @@ The following table lists the configurable parameters of the template Helm chart
 | `image.pullPolicy`         | Image pull policy                               | `Always`                                                   
 | `service.name`             | Openshift service name                                | `Node`                                                     |
 | `service.type`             | Openshift service type exposing port                  | `NodePort`                                                 |
-| `service.port`             | TCP Port for this service                       | 3000 |
-| `service.dns`             | Host name for this service. The host will concaten to the openshift domain                    | |
+| `service.port`             | TCP Port for this service                       | `3000` |
+| `service.dns`             | Host name for this service. The host will concaten to the openshift domain                    |`webapp` |
 | `resources.limits.memory`  | Memory resource limits                          | `128m`                                                     |
 | `resources.limits.cpu`     | CPU resource limits                             | `100m`                                                     |
