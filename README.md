@@ -12,11 +12,13 @@ This project provides the following files:
 | `/chart/webapp/Chart.yaml`                    | The definition file for your application                           | 
 | `/chart/webapp/values.yaml`                   | Configurable values that are inserted into the following template files      |        
 | `/chart/webapp/templates/deployment.yaml`     | Template to configure your application deployment.                 | 
-| `/chart/webapp/templates/service.yaml`        | Template to configure your application deployment.                 | 
+| `/chart/webapp/templates/service.yaml`        | Template to configure your application service.                 |
+| `/chart/webapp/templates/route.yaml`          | Template to configure your application route.                 | 
 
 In order to use these template files, copy the files from this project into your application directory. You should only need to edit the `Chart.yaml` and `values.yaml` files.
 
-## Deploying application in cloudlet
+## Creating new application in specific cloudlet
+Before deploying new application for the first time in a specifit cloudlet, the follwoing pre-requisitst need to
 
 
 ## Configuring the Chart for your Application
@@ -27,11 +29,12 @@ The following table lists the configurable parameters of the template Helm chart
 | -----------------------    | ---------------------------------------------   | ---------------------------------------------------------- |
 | `image.repository`         | image repository                                | `<namespace>/nodeserver`                                 |
 | `image.tag`                | Image tag                                       | `latest`                                                    |
-| `image.pullPolicy`         | Image pull policy                               | `Always`                                                   |
-| `livenessProbe`   | Configuration for any liveness probe provided |   YAML object of liveness probe. See [Liveness and Readiness Probes](#liveness-and-readiness-probes)                            |
-| `readinessProbe`         | Configuration provided for any liveness probe provided      | YAML object of readiness probe. See [Liveness and Readiness Probes](#liveness-and-readiness-probes)         |
-| `service.name`             | Kubernetes service name                                | `Node`                                                     |
-| `service.type`             | Kubernetes service type exposing port                  | `NodePort`                                                 |
-| `service.port`             | TCP Port for this service                       | 3000                                                       |
+| `image.pullPolicy`         | Image pull policy                               | `Always`                                                   
+| `service.name`             | Openshift service name                                | `Node`                                                     |
+| `service.type`             | Openshift service type exposing port                  | `NodePort`                                                 |
+| `service.port`             | TCP Port for this service                       | 3000
+                                                       |
+| `service.dns`             | Host name for this service. The host will concaten to the openshift domain                    | 
+                                                       |
 | `resources.limits.memory`  | Memory resource limits                          | `128m`                                                     |
 | `resources.limits.cpu`     | CPU resource limits                             | `100m`                                                     |
