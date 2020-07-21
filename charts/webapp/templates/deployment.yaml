@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: "{{  .Chart.Name  }}"
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: "quayecosystem-quay-quay-enterprise.{{ .Values.spec.destination.server }}/cloudlet/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.servicePort}}

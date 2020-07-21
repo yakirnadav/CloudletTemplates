@@ -27,7 +27,7 @@ The following table lists the configurable parameters of the template Helm chart
 
 | Parameter                  | Description                                     | Default                                                    |
 | -----------------------    | ---------------------------------------------   | ---------------------------------------------------------- |
-| `image.repository`         | image repository                                | `bonomat/nodejs-hello-world`                                 |
+| `image.name`               | image name to deploy from                                | `nodejs-hello-world`                                 |
 | `image.tag`                | Image tag                                       | `latest`                                                    |
 | `image.pullPolicy`         | Image pull policy                               | `Always`                                                   
 | `service.name`             | Openshift service name                                | `Node`                                                     |

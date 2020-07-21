@@ -4,9 +4,9 @@ replicaCount: 1
 spec:
   destination:
     namespace: helm-charts-demo
-    server: ''
+    server: ''  
 image:
-  repository: bonomat/nodejs-hello-world
+  name: nodejs-hello-world
   tag: latest
   pullPolicy: IfNotPresent 
   resources:
