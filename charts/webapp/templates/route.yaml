@@ -5,7 +5,7 @@ metadata:
   labels:
     chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
 spec:
-  host: "{{  .Values.service.dns }}.{{ .Values.spec.destination.server }}"
+  host: "{{  .Values.service.dns }}.{{ template "cluster_fqdn" . }}"
   port:
     targetPort: {{ .Values.service.servicePort }}-{{ .Values.service.servicePort }}
   {{- if .Values.service.tls }}
