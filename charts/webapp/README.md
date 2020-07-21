@@ -1,4 +1,3 @@
-# Helm Chart Templates for deploying application in cloudlet
 
 ## Helm Chart Templates for deploying simple web application in cloudlet
 This project provides template Helm Charts for deploying a  web application into any Kubernetes based cloud (Cloudlet).
@@ -17,10 +16,6 @@ This project provides the following files:
 
 In order to use these template files, copy the files from this project into your application directory. You should only need to edit the `Chart.yaml` and `values.yaml` files.
 
-## Helm Chart Templates for deploying postgreSQL cluster in your project
-
-
-
 ## Configuring the Chart for your Application
 
 The following table lists the configurable parameters of the template Helm chart and their default values.
@@ -37,7 +32,3 @@ The following table lists the configurable parameters of the template Helm chart
 | `service.tls`             | If you want ssl, define its termination type, otherwise leave that empty                 |`edge` |
 | `resources.limits.memory`  | Memory resource limits                          | `128m`                                                     |
 | `resources.limits.cpu`     | CPU resource limits                             | `100m`                                                     |
-
-## Steps for deploying new application in specific cloudlet using Helm-Charts
-### 1. Creating new Cloudlet Deployment Instance 
-### 2. Sync 
