@@ -17,6 +17,9 @@ This project provides the following files:
 
 In order to use these template files, copy the files from this project into your application directory. You should only need to edit the `Chart.yaml` and `values.yaml` files.
 
+# Helm Chart Templates for deploying postgreSQL cluster in your project
+
+
 
 ## Configuring the Chart for your Application
 
