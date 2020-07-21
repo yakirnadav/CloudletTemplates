@@ -5,17 +5,17 @@ metadata:
   labels:
     chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
 spec:
-  host: "{{  .Values.service.dns }}.apps.ocp43-test.sales.lab.tlv.redhat.com"
+  host: "{{  .Values.service.dns }}.apps.ocp43-prod.cloudlet-dev.com"
+  port:
+    targetPort: {{ .Values.service.servicePort }}-{{ .Values.service.servicePort }}
+    {{- if .Values.service.tls }}
+    tls:
+      termination: {{ .Values.service.tls }}
+      insecureEdgeTerminationPolicy: Allow
+    wildcardPolicy: None
+    {{- end }}
   to:
     kind: Service
     name: "{{  .Chart.Name }}-service"
     weight: 100
-    port:
-      targetPort: {{ .Values.service.servicePort }}-{{ .Values.service.servicePort }}
-      {{- if .Values.service.tls }}
-      tls:
-        termination: {{ .Values.service.tls }}
-        insecureEdgeTerminationPolicy: Allow
-      wildcardPolicy: None
-      {{- end }}
       
