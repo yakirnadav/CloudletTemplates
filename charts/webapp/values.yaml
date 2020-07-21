@@ -2,7 +2,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: heroku/nodejs-hello-world
+  repository: bonomat/nodejs-hello-world
   tag: latest
   pullPolicy: IfNotPresent 
   resources:
