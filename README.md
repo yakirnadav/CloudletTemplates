@@ -1,6 +1,6 @@
-# Helm Chart Templates for deploying web application in cloudlet
+# Helm Chart Templates for deploying application in cloudlet
 
-
+## Helm Chart Templates for deploying simple web application in cloudlet
 This project provides template Helm Charts for deploying a  web application into any Kubernetes based cloud (Cloudlet).
 
 The templates require your application to built into a Docker image. The [Docker Image](https://hub.docker.com/r/bonomat/nodejs-hello-world)  provides in this demo assistance in deploying simple nodejs "hello world" app using helm-charts.
@@ -17,7 +17,7 @@ This project provides the following files:
 
 In order to use these template files, copy the files from this project into your application directory. You should only need to edit the `Chart.yaml` and `values.yaml` files.
 
-# Helm Chart Templates for deploying postgreSQL cluster in your project
+## Helm Chart Templates for deploying postgreSQL cluster in your project
 
 
 
