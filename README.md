@@ -3,7 +3,7 @@
 
 This project provides template Helm Charts for deploying a  web application into any Kubernetes based cloud (Cloudlet).
 
-The templates require your application to built into a Docker image. The [Docker Templates](http://github.com/CloudNativeJS/docker) project provides assistance in creating an image for your application.
+The templates require your application to built into a Docker image. The [Docker Image](https://hub.docker.com/r/heroku/nodejs-hello-world/)  provides in this demo assistance in deploying simple nodejs "hello world" app using helm-charts.
 
 This project provides the following files:
 
@@ -24,17 +24,17 @@ The following table lists the configurable parameters of the template Helm chart
 
 | Parameter                  | Description                                     | Default                                                    |
 | -----------------------    | ---------------------------------------------   | ---------------------------------------------------------- |
-| `image.repository`         | image repository                                | `<namespace>/nodeserver`                                 |
+| `image.repository`         | image repository                                | `heroku/nodejs-hello-world`                                 |
 | `image.tag`                | Image tag                                       | `latest`                                                    |
 | `image.pullPolicy`         | Image pull policy                               | `Always`                                                   
 | `service.name`             | Openshift service name                                | `Node`                                                     |
 | `service.type`             | Openshift service type exposing port                  | `NodePort`                                                 |
 | `service.port`             | TCP Port for this service                       | `3000` |
-| `service.dns`             | Host name for this service. The host will concaten to the openshift domain                    |`webapp` |
+| `service.dns`             | Host name for this service. The host will concaten to the openshift domain                    |`nodejs-hello-world` |
 | `service.tls`             | If you want ssl, define its termination type, otherwise leave that empty                 |`edge` |
 | `resources.limits.memory`  | Memory resource limits                          | `128m`                                                     |
 | `resources.limits.cpu`     | CPU resource limits                             | `100m`                                                     |
 
 ## Steps for deploying new application in specific cloudlet using Helm-Charts
-### Creating new Application Instance 
-Before deploying new application for the first time in a specifit cloudlet, the follwoing pre-requisitst need to
+### 1. Creating new Cloudlet Deployment Instance 
+### 2. Sync 

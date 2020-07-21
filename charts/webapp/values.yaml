@@ -2,7 +2,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: yaron2/nodeserver
+  repository: heroku/nodejs-hello-world
   tag: latest
   pullPolicy: IfNotPresent 
   resources:
@@ -11,6 +11,6 @@ image:
       memory: 300Mi
 service:
   type: NodePort
-  servicePort: 3000
-  dns: webapp
+  servicePort: 443
+  dns: nodejs-hello-world
   tls: edge
