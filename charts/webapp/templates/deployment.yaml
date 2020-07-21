@@ -25,8 +25,8 @@ spec:
       - name: "{{  .Chart.Name  }}"
         image: "quayecosystem-quay-quay-enterprise.apps.{{ template "cluster_fqdn" . }}/cloudlet/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-      imagePullSecrets:
-        -name: image-secret
+        imagePullSecrets:
+          -name: image-secret
         ports:
         - containerPort: {{ .Values.service.servicePort}}
         resources:
