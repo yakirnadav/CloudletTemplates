@@ -3,7 +3,7 @@
 
 This project provides template Helm Charts for deploying a  web application into any Kubernetes based cloud (Cloudlet).
 
-The templates require your application to built into a Docker image. The [Docker Image](https://hub.docker.com/r/heroku/nodejs-hello-world/)  provides in this demo assistance in deploying simple nodejs "hello world" app using helm-charts.
+The templates require your application to built into a Docker image. The [Docker Image](https://hub.docker.com/r/bonomat/nodejs-hello-world)  provides in this demo assistance in deploying simple nodejs "hello world" app using helm-charts.
 
 This project provides the following files:
 
@@ -24,7 +24,7 @@ The following table lists the configurable parameters of the template Helm chart
 
 | Parameter                  | Description                                     | Default                                                    |
 | -----------------------    | ---------------------------------------------   | ---------------------------------------------------------- |
-| `image.repository`         | image repository                                | `heroku/nodejs-hello-world`                                 |
+| `image.repository`         | image repository                                | `bonomat/nodejs-hello-world`                                 |
 | `image.tag`                | Image tag                                       | `latest`                                                    |
 | `image.pullPolicy`         | Image pull policy                               | `Always`                                                   
 | `service.name`             | Openshift service name                                | `Node`                                                     |
