@@ -2,7 +2,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  name: nodejs-hello-world
+  name: helm-charts-demo
   tag: latest
   pullPolicy: IfNotPresent 
   resources:
