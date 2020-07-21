@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{  .Chart.Name }}-deployment"
+  name: "{{  .Chart.Name }}-{{ template "cluster_name" . }}"
   labels:
     chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
 spec:

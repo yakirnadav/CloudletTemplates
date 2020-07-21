@@ -5,7 +5,7 @@ metadata:
   labels:
     chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
 spec:
-  host: "{{  .Values.service.dns }}.apps.ocp43-prod.cloudlet-dev.com"
+  host: "{{  .Values.service.dns }}.{{ template "cluster_name" . }}"
   port:
     targetPort: {{ .Values.service.servicePort }}-{{ .Values.service.servicePort }}
   {{- if .Values.service.tls }}
