@@ -15,7 +15,6 @@ spec:
     matchLabels:
       app: "{{  .Chart.Name }}-selector"
       version: "current"
-  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   template:
     metadata:
       labels:
