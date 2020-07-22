@@ -35,4 +35,4 @@ spec:
           - name: PORT
             value : "{{ .Values.service.servicePort }}"
       imagePullSecrets:
-        - name: image-sercret
+        - name: image-secret
