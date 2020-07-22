@@ -7,7 +7,7 @@ var MongoClient = require('mongodb').MongoClient;
 // Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
-const URI = "mongodb://root:admin@bitnami-mongodb-cluster-ocp43-prod-0.bitnami-mongodb-cluster-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,bitnamimongodb-cluster-ocp43-prod-1,bitnami-mongodb-cluster-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,bitnami-mongodb-cluster-ocp43-prod-2.bitnami-mongodb-cluster-ocp43-prod-headless.mongdb-cluster.svc.cluster.local/?authSource=admin&replicaSet=rs0"
+const URI = "mongodb://root:admin@node-mongodb-ocp43-prod-0.node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,bitnamimongodb-cluster-ocp43-prod-1,node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,node-mongodb-ocp43-prod-2.node-mongodb-ocp43-prod-headless.mongdb-cluster.svc.cluster.local/?authSource=admin&replicaSet=rs0"
 
 // App
 const app = express();
