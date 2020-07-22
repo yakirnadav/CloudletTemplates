@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: "{{  .Chart.Name  }}"
-        image: "quayecosystem-quay-quay-enterprise.apps.{{ template "cluster_fqdn" . }}/cloudlet/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        image: "quayecosystem-quay-quay-enterprise.apps.{{ template "cluster_fqdn" . }}/{{.Values.spec.destination.namespace}}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.servicePort}}
