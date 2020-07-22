@@ -13,7 +13,7 @@ const app = express();
 app.get('/', (req, res) => {
     sequelize.authenticate().then(() => {
         console.log('Connection has been established successfully.');
-        res.status(200).send("Connection to database successful")
+        res.status(200).send("Connection to database successful");
     }).catch(err => {
         res.status(404).send("Oh uh, something went wrong");
     });
