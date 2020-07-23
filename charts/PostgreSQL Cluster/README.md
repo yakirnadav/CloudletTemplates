@@ -93,9 +93,9 @@ The pgcluser CRD is used to generate a cluster instance using the parameters, pa
 ## Connection Endpoint
 
 The postgresql service endpoint will be available as a private Kubernetes cluster DNS address:
-(This uses the *PG_CLUSTER_NAME* variable)
 
 ```
+Example:
 mycluster.pgo.svc.cluster.local
 ```
 
@@ -103,5 +103,7 @@ The Node.JS connection endpoint will be available through a route at:
 (This uses the *Namespace,Application_Name* variables)
 
 ```
+https://application_name-namespace.apps.cluster_fqdn
+Example:
 http://sampleapp-node-postgres.apps.ocp43-preprod.cloudlet-dev.com
 ```

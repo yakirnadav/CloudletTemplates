@@ -65,15 +65,15 @@ The MongoDB statefulset is used to generate a cluster instance consisting of a *
 ## Connection Endpoint
 
 The MongoDB service endpoint will be available as a private Kubernetes cluster DNS address:
-(This uses the *PG_CLUSTER_NAME* variable)
-
 ```
+namespace-cluster_name-headless.namespaceOverride.svc.cluster.local
+Example:
 node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local
 ```
 
 The Node.JS connection endpoint will be available through a route at:
-(This uses the *Namespace,Application_Name* variables)
-
 ```
+https://application_name-namespace.apps.cluster_fqdn
+Example:
 http://sampleapp-node-mongodb.apps.ocp43-prod.cloudlet-dev.com
 ```
