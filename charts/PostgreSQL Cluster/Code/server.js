@@ -1,11 +1,19 @@
 'use strict';
 
 const express = require('express');
+const https = require('https');
+const fs = require('fs');
 const Sequelize = require('sequelize')
+var key = fs.readFileSync('selfsigned.key');
+var cert = fs.readFileSync('selfsigned.crt');
+var options = {
+    key: key,
+    cert: cert
+  };
 const sequelize = new Sequelize('postgres://myuser:password@sampleapp.pgo.svc.cluster.local:5432/sampleapp')
 
 // Constants
-const PORT = 8080;
+const PORT = 443;
 const HOST = '0.0.0.0';
 
 // App
@@ -27,5 +35,9 @@ app.get('/bad-health',(req,res)=> {
     res.status(500).send('Health check did not pass');
 });
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+var server = https.createServer(options, app);
+
+server.listen(PORT, HOST, () => {
+  console.log("server starting on port : " + PORT)
+});
+console.log(`Running on https://${HOST}:${PORT}`);
