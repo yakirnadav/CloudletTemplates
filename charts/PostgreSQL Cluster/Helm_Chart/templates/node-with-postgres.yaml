@@ -64,12 +64,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /health-check
-            port: 8080
+            port: 443
           initialDelaySeconds: 3
           periodSeconds: 3
           failureThreshold: 2
         ports:
-        - containerPort: 8080
+        - containerPort: 443
           name: http
           protocol: TCP
       terminationGracePeriodSeconds: 75
