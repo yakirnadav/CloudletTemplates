@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "express": "^4.16.1",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
     "mongodb": "^3.5.9"
   }
 }
