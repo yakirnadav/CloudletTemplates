@@ -13,7 +13,7 @@ var MongoClient = require('mongodb').MongoClient;
 
 
 // Constants
-const PORT = 443;
+const PORT = 8443;
 const HOST = '0.0.0.0';
 const URI = "mongodb://root:admin@node-mongodb-ocp43-prod-0.node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,bitnamimongodb-cluster-ocp43-prod-1,node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,node-mongodb-ocp43-prod-2.node-mongodb-ocp43-prod-headless.mongdb-cluster.svc.cluster.local/?authSource=admin&replicaSet=rs0"
 

@@ -13,7 +13,7 @@ var options = {
 const sequelize = new Sequelize('postgres://myuser:password@sampleapp.pgo.svc.cluster.local:5432/sampleapp')
 
 // Constants
-const PORT = 443;
+const PORT = 8443;
 const HOST = '0.0.0.0';
 
 // App
