@@ -1,11 +1,19 @@
 'use strict';
 
 const express = require('express');
+const https = require('https');
+const fs = require('fs');
+var key = fs.readFileSync('selfsigned.key');
+var cert = fs.readFileSync('selfsigned.crt');
+var options = {
+    key: key,
+    cert: cert
+  };
 var MongoClient = require('mongodb').MongoClient;
 
 
 // Constants
-const PORT = 8080;
+const PORT = 443;
 const HOST = '0.0.0.0';
 const URI = "mongodb://root:admin@node-mongodb-ocp43-prod-0.node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,bitnamimongodb-cluster-ocp43-prod-1,node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local,node-mongodb-ocp43-prod-2.node-mongodb-ocp43-prod-headless.mongdb-cluster.svc.cluster.local/?authSource=admin&replicaSet=rs0"
 
@@ -33,5 +41,9 @@ app.get('/bad-health',(req,res)=> {
     res.status(500).send('Health check did not pass');
 });
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+var server = https.createServer(options, app);
+
+server.listen(PORT, HOST, () => {
+  console.log("server starting on port : " + PORT)
+});
+console.log(`Running on https://${HOST}:${PORT}`);
