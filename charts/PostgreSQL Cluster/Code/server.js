@@ -3,6 +3,7 @@
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
+const config = require('./config');
 const Sequelize = require('sequelize')
 var key = fs.readFileSync('selfsigned.key');
 var cert = fs.readFileSync('selfsigned.crt');
@@ -10,7 +11,7 @@ var options = {
     key: key,
     cert: cert
   };
-const sequelize = new Sequelize('postgres://myuser:password@sampleapp.pgo.svc.cluster.local:5432/sampleapp')
+const sequelize = new Sequelize('postgres://' + config.db.username + ':' + config.db.password + '@' + config.app.app_name + '.pgo.svc.cluster.local:5432/' + config.db.database)
 
 // Constants
 const PORT = 8443;

@@ -78,6 +78,11 @@ spec:
               secretKeyRef:
                 name: node-secret-monitoring
                 key: DB_PASSWORD
+          - name: DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: node-config
+                key: DATABASE
         livenessProbe:
           httpGet:
             path: /health-check

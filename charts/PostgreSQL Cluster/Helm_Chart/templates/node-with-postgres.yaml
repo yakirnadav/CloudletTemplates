@@ -9,14 +9,14 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.APPLICATION_NAME }}
+  name: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
   namespace: {{ .Values.namespace }}
 spec:
   ports:
   - port: 443
     targetPort: 8443
   selector:
-    deploymentConfig: {{ .Values.APPLICATION_NAME }}
+    deploymentConfig: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
@@ -24,14 +24,14 @@ metadata:
   annotations:
     description: Route for application's http service.
   labels:
-    application: {{ .Values.APPLICATION_NAME }}
-  name: {{ .Values.APPLICATION_NAME }}
+    application: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
+  name: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
   namespace: {{ .Values.namespace }}
 spec:
-  host: "{{ .Values.APPLICATION_NAME }}-{{ .Values.namespace }}.apps.{{ template "cluster_fqdn" . }}"
+  host: ""
   to:
     kind: Service
-    name: {{ .Values.APPLICATION_NAME }}
+    name: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
   tls:
     termination: passthrough
     insecureEdgeTerminationPolicy: Redirect
@@ -40,27 +40,47 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    application: {{ .Values.APPLICATION_NAME }}
-  name: {{ .Values.APPLICATION_NAME }}
+    application: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
+  name: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
   namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   selector:
-    deploymentConfig: {{ .Values.APPLICATION_NAME }}
+    deploymentConfig: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        application: {{ .Values.APPLICATION_NAME }}
-        deploymentConfig: {{ .Values.APPLICATION_NAME }}
-      name: {{ .Values.APPLICATION_NAME }}
+        application: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
+        deploymentConfig: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
+      name: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
     spec:
       containers:
-      - name: sampleapp
+      - name: {{ index .Values "pgcluster" "PG_CLUSTER_NAME" }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
-        name: {{ .Values.APPLICATION_NAME }}
+        env:
+          - name: APPLICATION_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: node-config
+                key: APPLICATION_NAME
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: node-secret
+                key: DB_USERNAME
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: node-secret
+                key: DB_PASSWORD
+          - name: DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: node-config
+                key: DATABASE
         livenessProbe:
           httpGet:
             path: /health-check
