@@ -16,7 +16,7 @@ console.log(config);
 // Constants
 const PORT = 8443;
 const HOST = '0.0.0.0';
-const URI = "mongodb://"+ config.db.username + ":" + config.db.password + "@" + config.app.app_name + "-0." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-1." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-2." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local/?authSource=admin&replicaSet=" + config.db.replicaset
+const URI = "mongodb://"+ config.db.username + ":" + config.db.password + "@" + config.app.app_name + "-0." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-1." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-2." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local/?authSource=" + config.db.database + "&replicaSet=" + config.db.replicaset
 console.log(URI);
 // App
 const app = express();
