@@ -6,7 +6,7 @@ The code for this application is available in ```Code``` folder.
 
 ## Usage
 
-The following ```values.yaml``` file is used in order to define the application. For this example, do not change any parameters. For use of the example template in production, see **Code/server.js**:
+The following ```values.yaml``` file is used in order to define the application. some of the variables here are saved in config maps and secrets, then loaded into the container using environment variables. For use of the example template in production, see **Code/server.js** and **Code/config.js**:
 
 ```yaml
 image:
@@ -25,7 +25,7 @@ mongodb-cluster:
   replicaSetName: rs0
   replicaCount: 3
   global:
-    namespaceOverride: mongodb-cluster
+    namespaceOverride: mongodb-clusters
 ```
 
 ## How Does It Work
