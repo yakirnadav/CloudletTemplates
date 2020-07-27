@@ -1,6 +1,9 @@
+image_monitoring:
+  repository: quay.io/amitai333/sampleapp2
+  tag: latest
 APPLICATION_NAME: sampleapp
 global:
-  namespaceOverride: mongodb-cluster
+  namespaceOverride: ""
 image:
   registry: docker.io
   repository: bitnami/mongodb
@@ -12,11 +15,11 @@ architecture: replicaset
 useStatefulSet: true
 auth:
   enabled: true
-  rootPassword: "admin"
-  username: admin
-  password: admin
-  database: sampledb
-replicaSetName: rs0
+  rootPassword: ""
+  username: ""
+  password: ""
+  database: ""
+replicaSetName: ""
 replicaSetHostnames: true
 enableIPv6: false
 directoryPerDB: false
@@ -28,7 +31,7 @@ extraFlags: []
 extraEnvVars: []
 annotations: {}
 labels: {}
-replicaCount: 3
+replicaCount: ""
 strategyType: RollingUpdate
 podManagementPolicy: OrderedReady
 affinity: {}

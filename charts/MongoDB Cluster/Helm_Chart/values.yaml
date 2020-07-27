@@ -3,14 +3,15 @@ image:
   tag: latest
 
 namespace: node-mongodb-sampleapp
-APPLICATION_NAME: sampleapp
 
 # DB VARS
-mongodb-cluster:
-  rootPassword: "admin"
-  username: admin
-  password: admin
-  database: sampledb
+mongodb:
+  APPLICATION_NAME: sampleapp
+  auth:
+    rootPassword: "admin"
+    username: admin
+    password: admin
+    database: sampledb
   replicaSetName: rs0
   replicaCount: 3
   global:

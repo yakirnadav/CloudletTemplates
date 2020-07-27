@@ -13,30 +13,36 @@ image:
   repository: quay.io/amitai333/sampleapp2
   tag: latest
 
-namespace: node-mongodb
-APPLICATION_NAME: sampleapp
+namespace: node-mongodb-sampleapp
 
 # DB VARS
-mongodb-cluster:
-  rootPassword: "admin"
-  username: admin
-  password: admin
-  database: sampledb
+mongodb:
+  APPLICATION_NAME: sampleapp
+  auth:
+    rootPassword: "admin"
+    username: admin
+    password: admin
+    database: sampledb
   replicaSetName: rs0
   replicaCount: 3
   global:
-    namespaceOverride: mongodb-clusters
+    namespaceOverride: mongodb-clusters # Do not change. This is the project for all mongodb clusters
 ```
 
 ## How Does It Work
 
 The Node.JS chart deploys basic kubernetes resources, and then deploys a sub chart for the MongoDB Cluster.
+
+(Another instance of this application is deployed as a "monitoring" service for the use of keepalive services, and is deployed with each MongoDB cluster. ignore for the purpose of this example)
+
 The Node.JS resources are:
 ```yaml
 - Namespace # The project definition
-- Service # A connection to the Node.JS container/pod port 8080
+- Service # A connection to the Node.JS container/pod port 8443
 - Route # Exposure of service to the internet
 - DeploymentConfig # Definition of Node.JS container/pod
+- ConfigMap # Database connection values
+- Secret # Database connection Username and Password
 ```
 The Database resources of the sub-chart are:
 ```yaml
@@ -66,14 +72,18 @@ The MongoDB statefulset is used to generate a cluster instance consisting of a *
 
 The MongoDB service endpoint will be available as a private Kubernetes cluster DNS address:
 ```
-namespace-cluster_name-headless.namespaceOverride.svc.cluster.local
+application_name-headless.namespaceOverride.svc.cluster.local
+
 Example:
-node-mongodb-ocp43-prod-headless.mongodb-cluster.svc.cluster.local
+
+sampleapp-headless.mongodb-clusters.svc.cluster.local
 ```
 
 The Node.JS connection endpoint will be available through a route at:
 ```
 https://application_name-namespace.apps.cluster_fqdn
+
 Example:
-http://sampleapp-node-mongodb.apps.ocp43-prod.cloudlet-dev.com
+
+https://sampleapp-node-mongodb-sampleapp.apps.ocp43-prod.cloudlet-dev.com/
 ```
