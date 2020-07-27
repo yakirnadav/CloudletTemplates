@@ -12,7 +12,7 @@ var options = {
 };
 var MongoClient = require('mongodb').MongoClient;
 
-
+console.log(config);
 // Constants
 const PORT = 8443;
 const HOST = '0.0.0.0';
