@@ -8,7 +8,7 @@ The code for this application is available in ```Code``` folder.
 
 ## Usage
 
-The following ```values.yaml``` file is used in order to define the application. For this example, do not change any parameters. For use of the example template in production, see **Code/server.js**:
+The following ```values.yaml``` file is used in order to define the application. some of the variables here are saved in config maps and secrets, then loaded into the container using environment variables. For use of the example template in production, see **Code/server.js** and **Code/config.js**:
 
 ```yaml
 image:
@@ -16,15 +16,13 @@ image:
   tag: latest # Do not change
 
 namespace: node-postgres # Your project name
-APPLICATION_NAME: sampleapp # Your Node.JS app name
 
 # DB VARS
 pgcluster:
   PG_STORAGE_SIZE: 1G # DB storage size request
   PG_REPLICAS: "2" # Replicas (secondaries). 2 recommnded.
   PG_CLUSTER_NAME: "sampleapp" # Replica set name
-  PG_DATABASE_NAME: sampleapp # Database name used by your app
-  PG_SERVICE_PREFIX: "sampleapp.pgo" # PG_CLUSTER_NAME + .pgo
+  PG_DATABASE_NAME: "sampledb" # Database name used by your app
   DB_USERNAME: myuser # DB Administrator user name
   DB_PASSWORD: password # DB Administrator password
 
@@ -71,6 +69,9 @@ metadata:
 ## How Does It Work
 
 The Node.JS chart deploys basic kubernetes resources, and then deploys a sub chart for the PostgreSQL Cluster.
+
+(Another instance of this application is deployed as a "monitoring" service for the use of keepalive services, and is deployed with each PostgreSQL cluster. ignore for the purpose of this example)
+
 The Node.JS resources are:
 ```yaml
 - Namespace # The project definition
@@ -105,5 +106,5 @@ The Node.JS connection endpoint will be available through a route at:
 ```
 https://application_name-namespace.apps.cluster_fqdn
 Example:
-http://sampleapp-node-postgres.apps.ocp43-preprod.cloudlet-dev.com
+https://sampleapp-node-postgres.apps.ocp43-prod.cloudlet-dev.com/
 ```
