@@ -12,7 +12,7 @@ var options = {
     cert: cert
   };
 const sequelize = new Sequelize('postgres://' + config.db.username + ':' + config.db.password + '@' + config.app.app_name + '.pgo.svc.cluster.local:5432/' + config.db.database)
-
+console.log('postgres://' + config.db.username + ':' + config.db.password + '@' + config.app.app_name + '.pgo.svc.cluster.local:5432/' + config.db.database)
 // Constants
 const PORT = 8443;
 const HOST = '0.0.0.0';
