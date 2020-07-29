@@ -13,8 +13,8 @@ var options = {
 var MongoClient = require('mongodb').MongoClient;
 const URI = "mongodb://"+ config.db.username + ":" + config.db.password + "@" + config.app.app_name + "-0." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-1." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-2." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local/?tls=true&authSource=" + config.db.database + "&replicaSet=" + config.db.replicaset
 const client = new MongoClient(URI, {
-  tlsCAFile: `${__dirname}/sampleapp.crt`,
-  tlsCertificateKeyFile: `${__dirname}/sampleapp.pem`,
+  tlsCAFile: 'sampleapp.crt',
+  tlsCertificateKeyFile: 'sampleapp.pem',
   tlsInsecure: true,
   tlsAllowInvalidCertificates: true,
   tlsAllowInvalidHostnames: true
