@@ -34,11 +34,12 @@ app.get('/', (req, res) => {
 
         if (err) {
             res.status(404).send("Oh uh, something went wrong");
+            client.close();
         };
 
         res.status(200).send("Connection to database successful");
         //Write databse Insert/Update/Query code here..
-
+        client.close();
     });
 });
 
