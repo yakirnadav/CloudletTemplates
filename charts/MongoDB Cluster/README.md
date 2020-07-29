@@ -27,6 +27,45 @@ mongodb:
   replicaCount: 3
   global:
     namespaceOverride: mongodb-clusters # Do not change. This is the project for all mongodb clusters
+  
+  # TLS variables. Ignore unless changing TLS settings
+  extraFlags:
+    - "--tlsMode=preferTLS"
+    - "--tlsCertificateKeyFile=/certificates/sampleapp.pem"
+    - "--tlsClusterFile=/certificates/sampleapp.pem"
+    - "--tlsCAFile=/certificates/sampleapp.crt"
+    - "--tlsAllowConnectionsWithoutCertificates"
+    - "--tlsAllowInvalidCertificates"
+  extraEnvVars:
+    - name: MONGODB_CLIENT_EXTRA_FLAGS
+      value: --ssl --tlsAllowInvalidCertificates --tlsCertificateKeyFile=/certificates/sampleapp.pem --tlsCAFile=/certificates/sampleapp.crt
+  extraVolumeMounts:
+    - name: cert-volume
+      mountPath: /certificates
+      readOnly: true
+  extraVolumes:
+    - name: cert-volume
+      secret:
+        secretName: sampleapp-certificates
+  arbiter:
+    extraFlags:
+      - "--tlsMode=preferTLS"
+      - "--tlsCertificateKeyFile=/certificates/sampleapp.pem"
+      - "--tlsClusterFile=/certificates/sampleapp.pem"
+      - "--tlsCAFile=/certificates/sampleapp.crt"
+      - "--tlsAllowConnectionsWithoutCertificates"
+      - "--tlsAllowInvalidCertificates"
+    extraEnvVars:
+      - name: MONGODB_CLIENT_EXTRA_FLAGS
+        value: --ssl --tlsAllowInvalidCertificates --tlsCertificateKeyFile=/certificates/sampleapp.pem --tlsCAFile=/certificates/sampleapp.crt
+    extraVolumeMounts:
+      - name: cert-volume
+        mountPath: /certificates
+        readOnly: true
+    extraVolumes:
+      - name: cert-volume
+        secret:
+          secretName: sampleapp-certificates
 ```
 
 ## How Does It Work
@@ -56,6 +95,7 @@ The Database resources of the sub-chart are:
 - secrets.yaml
 - serviceaccount.yaml
 - servicemonitor.yaml
+- certificates.yaml # See chapter below for more information
 ```
 ----------
 Replica set resources:
@@ -67,6 +107,66 @@ Replica set resources:
 - statefulset.yaml
 ```
 The MongoDB statefulset is used to generate a cluster instance consisting of a *replica set* using the parameters, passwords and names listed in the custom variables.
+
+## Optional: TLS Configuration
+
+This example uses example CRT and KEY files (`sample.crt` and `sample.pem`) inside a Kubernetes secret called `certificates.yaml` that is mounted to the `/certificates` location on a seperate volume inside the MongoDB pods, so your cluster comes pre-built with TLS (self generated) encryption which the Node.JS uses to connect to the Cluster. 
+
+It is important to note that the example image is packaged with the `sample.crt` and `sample.pem` files. In order to create your own custom certificates, the image must be repackaged and rebuilt.
+
+In order to create self-signed certificates, do the following steps:
+
+```bash
+openssl genrsa -out mongoCA.key 2048
+
+openssl req -x509 -new -subj "/CN=mongoCA" -key mongoCA.key -out mongoCA.crt
+
+# "sampleapp" is used as the application name. It can be changed as long as server.js under the "Code" folder is updated accordingly
+openssl req -new -nodes -subj "/CN=sampleapp" -keyout sampleapp.key -out sampleapp.csr
+
+openssl x509 -req -days 365 -in sampleapp.csr -out sampleapp.crt -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extensions req
+
+cat sampleapp.key sampleapp.crt > sampleapp.pem
+
+rm -f sampleapp.csr
+```
+
+Create the kubernets secret and replace it with charts/mongodb/templates/certificates.yaml
+
+```
+oc create secret generic mycert --from-file=sampleapp.crt=sampleapp.crt --from-file=sampleapp.pem=sampleapp.pem --dry-run -o yaml > certificates.yaml
+```
+Copy other rows to make it look like this, without changing the data section:
+```yaml
+apiVersion: v1
+data:
+  sampleapp.crt: # Long string
+  sampleapp.pem: # Long string
+kind: Secret
+metadata:
+  name: '{{ include "mongodb.fullname" . }}-certificates'
+  namespace: {{ template "mongodb.namespace" . }}
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: mongodb
+
+```
+Next, if you changed "sampleapp" to another name, go to `values.yaml` and change all occurences of "sampleapp" into your new application name.
+
+To update the image to use the new certificates (must be done, even if the name is still "sampleapp" because the certificate is differend and the client must have it for authentication), go to `Code` folder and `server.js`:
+1. Copy the .crt and .pem files to the `Code` folder
+2. Change the Node file reference in `server.js`:
+```js
+var mongoCa = fs.readFileSync('sampleapp.crt'); // Or new_name.crt
+var mongoKey = fs.readFileSync('sampleapp.pem'); // Or new_name.pem
+```
+3. Rebuild the image and upload to your quay repository. Don't forget to update the repository and tag refernce in `values.yaml`:
+```yaml
+image:
+  repository: quay.io/your_org/your_updated_app
+  tag: latest
+```
+____
+*For advanced, secure and trusted TLS settings beyond the scope of this README see the Official MongoDB Documentation.
 
 ## Connection Endpoint
 
