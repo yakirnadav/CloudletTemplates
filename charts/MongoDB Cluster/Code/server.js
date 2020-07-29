@@ -11,18 +11,26 @@ var options = {
     cert: cert
 };
 var MongoClient = require('mongodb').MongoClient;
-
+const URI = "mongodb://"+ config.db.username + ":" + config.db.password + "@" + config.app.app_name + "-0." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-1." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-2." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local/?tls=true&authSource=" + config.db.database + "&replicaSet=" + config.db.replicaset
+const client = new MongoClient(URI, {
+  tlsCAFile: `${__dirname}/sampleapp.crt`,
+  tlsCertificateKeyFile: `${__dirname}/sampleapp.pem`,
+  tlsInsecure: true,
+  tlsAllowInvalidCertificates: true,
+  tlsAllowInvalidHostnames: true
+});
 console.log(config);
+console.log(client)
 // Constants
 const PORT = 8443;
 const HOST = '0.0.0.0';
-const URI = "mongodb://"+ config.db.username + ":" + config.db.password + "@" + config.app.app_name + "-0." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-1." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-2." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local/?authSource=" + config.db.database + "&replicaSet=" + config.db.replicaset
+
 console.log(URI);
 // App
 const app = express();
 app.get('/', (req, res) => {
     // Connect to the db
-    MongoClient.connect(URI, function (err, db) {
+    client.connect( function (err, db) {
 
         if (err) {
             res.status(404).send("Oh uh, something went wrong");
