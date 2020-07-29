@@ -73,11 +73,6 @@ spec:
               configMapKeyRef:
                 name: node-config
                 key: REPLICA_SET
-          - name: DATABASE
-            valueFrom:
-              configMapKeyRef:
-                name: node-config
-                key: DATABASE
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
