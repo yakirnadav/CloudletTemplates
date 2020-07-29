@@ -101,7 +101,7 @@ mycluster.pgo.svc.cluster.local
 ```
 
 The Node.JS connection endpoint will be available through a route at:
-(This uses the *Namespace,Application_Name* variables)
+(This uses the *Namespace,PG_CLUSTER_NAME* variables)
 
 ```
 https://application_name-namespace.apps.cluster_fqdn
