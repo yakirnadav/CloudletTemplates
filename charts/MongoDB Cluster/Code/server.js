@@ -6,6 +6,8 @@ const https = require('https');
 const fs = require('fs');
 var key = fs.readFileSync('selfsigned.key');
 var cert = fs.readFileSync('selfsigned.crt');
+var mongoCa = fs.readFileSync('sampleapp.crt');
+var mongoKey = fs.readFileSync('sampleapp.pem');
 var options = {
     key: key,
     cert: cert
@@ -13,12 +15,13 @@ var options = {
 var MongoClient = require('mongodb').MongoClient;
 const URI = "mongodb://"+ config.db.username + ":" + config.db.password + "@" + config.app.app_name + "-0." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-1." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local," + config.app.app_name + "-2." + config.app.app_name + "-headless." + config.db.namespace + ".svc.cluster.local/?tls=true&authSource=" + config.db.database + "&replicaSet=" + config.db.replicaset
 const client = new MongoClient(URI, {
-  tlsCAFile: 'sampleapp.crt',
-  tlsCertificateKeyFile: 'sampleapp.pem',
+  tlsCA: mongoCa,
+  tlsCertificateKey: mongoKey,
   tlsInsecure: true,
   tlsAllowInvalidCertificates: true,
   tlsAllowInvalidHostnames: true
 });
+
 console.log(config);
 console.log(client)
 // Constants
