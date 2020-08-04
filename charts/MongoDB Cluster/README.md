@@ -110,9 +110,9 @@ The MongoDB statefulset is used to generate a cluster instance consisting of a *
 
 ## Optional: TLS Configuration
 
-This example uses example CRT and KEY files (`sample.crt` and `sample.pem`) inside a Kubernetes secret called `certificates.yaml` that is mounted to the `/certificates` location on a seperate volume inside the MongoDB pods, so your cluster comes pre-built with TLS (self generated) encryption which the Node.JS uses to connect to the Cluster. 
+This example uses example CRT and KEY files (`sample.crt` and `sample.pem`) inside a Kubernetes secret called `certificates.yaml` that is mounted to the `/certificates` location on a seperate volume inside the MongoDB pods AND in the node.js application, so your cluster comes pre-built with TLS (self generated) encryption which the Node.JS uses to connect to the Cluster. 
 
-It is important to note that the example image is packaged with the `sample.crt` and `sample.pem` files. In order to create your own custom certificates, the image must be repackaged and rebuilt.
+It is important to note that the example image is not packaged with the `sample.crt` and `sample.pem` files and they are loaded through a Kubernetes secrets to a seperate volume. In order to create your own custom certificates, the secret must be rebuilt.
 
 In order to create self-signed certificates, do the following steps:
 
@@ -150,20 +150,31 @@ metadata:
     app.kubernetes.io/component: mongodb
 
 ```
-Next, if you changed "sampleapp" to another name, go to `values.yaml` and change all occurences of "sampleapp" into your new application name.
 
-To update the image to use the new certificates (must be done, even if the name is still "sampleapp" because the certificate is differend and the client must have it for authentication), go to `Code` folder and `server.js`:
-1. Copy the .crt and .pem files to the `Code` folder
-2. Change the Node file reference in `server.js`:
-```js
-var mongoCa = fs.readFileSync('sampleapp.crt'); // Or new_name.crt
-var mongoKey = fs.readFileSync('sampleapp.pem'); // Or new_name.pem
-```
-3. Rebuild the image and upload to your quay repository. Don't forget to update the repository and tag refernce in `values.yaml`:
+Copy certificates.yaml as node-certificates.yaml under templates/node-certificates.yaml and make it look like this:
 ```yaml
-image:
-  repository: quay.io/your_org/your_updated_app
-  tag: latest
+apiVersion: v1
+data:
+  sampleapp.crt: # Long String
+  sampleapp.pem: # Long String
+kind: Secret
+metadata:
+  name: node-certificates
+  namespace: {{ .Values.namespace }}
+```
+
+Copy certificates.yaml as node-certificates.yaml under charts/mongodb/templates/node-certificates.yaml and make it look like this:
+```yaml
+apiVersion: v1
+data:
+  sampleapp.crt: # Long String
+  sampleapp.pem: # Long String
+kind: Secret
+metadata:
+  name: 'node-{{ include "mongodb.fullname" . }}-certificates'
+  namespace: {{ template "mongodb.namespace" . }}
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: mongodb
 ```
 ____
 *For advanced, secure and trusted TLS settings beyond the scope of this README see the Official MongoDB Documentation.
