@@ -6,8 +6,8 @@ const https = require('https');
 const fs = require('fs');
 var key = fs.readFileSync('selfsigned.key');
 var cert = fs.readFileSync('selfsigned.crt');
-var mongoCa = fs.readFileSync('sampleapp.crt');
-var mongoKey = fs.readFileSync('sampleapp.pem');
+var mongoCa = fs.readFileSync('/certificates/sampleapp.crt');
+var mongoKey = fs.readFileSync('/certificates/sampleapp.pem');
 var options = {
     key: key,
     cert: cert
