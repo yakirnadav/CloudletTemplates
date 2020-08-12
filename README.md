@@ -12,4 +12,21 @@ In order to use these template files, you need to copy the files for each servic
 ## Steps for deploying new application in specific cloudlet using Helm-Charts
 ### 1. Go to [Cloudlet Development Application form](http://devel.cloudlet-dev.com:8080)
 
-### 2. Sync 
+### 2. Enter your project details and click deploy
+* Project Name - The name of the porject that will appers in the edge OCP
+* GIT Repo URL - The link of the code repo that has the project helm-charts
+* Application Path - The specific path of the charts in the repo
+* Image Name / Repository Name - The application image that will be deployed in the edge OCP
+* Main Quay username - The user name of the docker registry with the application image to pull
+* Main Quay Password - The password of the docker registry
+* Tags for image - the specific tags to deploy to edge (* for all tags)
+* Password for Openshift - The password of the edge ocp to connect (the user name is the project name using '_' instead of spaces)
+
+### 3. Select the specifit cloudlets to deploy your project to
+### 4. Wait for the deployment proccess to be done
+With every new deployment the following action are taken:
+1. A new project and credentials are beeing created in the edge openshift
+2. A image mirror from the main docker registry to the edge are beeing created to sync automaticly your images to the edge
+3. A new Application is beeing created in the ArgoCD for syncing the infrastrucure code from your git repo
+
+### 5. Sync the application to the edge and watch your deployment 
