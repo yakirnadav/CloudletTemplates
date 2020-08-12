@@ -10,5 +10,6 @@ In order to use these template files, you need to copy the files for each servic
 
 
 ## Steps for deploying new application in specific cloudlet using Helm-Charts
-### 1. Creating new Cloudlet Deployment Instance 
+### 1. Go to [Cloudlet Development Application form](http://devel.cloudlet-dev.com:8080)
+
 ### 2. Sync 
