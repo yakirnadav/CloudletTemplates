@@ -11,7 +11,7 @@ In order to use these template files, you need to copy the files for each servic
 
 ## Steps for deploying new application in specific cloudlet using Helm-Charts
 ### 1. Go to [Cloudlet Development Application form](http://devel.cloudlet-dev.com:8080)
-![Alt text](/img/Image1.jpg?raw=true)
+![Alt text](../img/Image1.jpg?raw=true)
 ### 2. Enter your project details and click deploy
 * Project Name - The name of the porject that will appers in the edge OCP
 * GIT Repo URL - The link of the code repo that has the project helm-charts
