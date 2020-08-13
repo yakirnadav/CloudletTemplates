@@ -21,12 +21,13 @@ In order to use these template files, you need to copy the files for each servic
 * Main Quay Password - The password of the docker registry
 * Tags for image - the specific tags to deploy to edge (* for all tags)
 * Password for Openshift - The password of the edge ocp to connect (the user name is the project name using '_' instead of spaces)
-
+![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image2.png?raw=true)
 ### 3. Select the specifit cloudlets to deploy your project to
+![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image3.png?raw=true)
 ### 4. Wait for the deployment proccess to be done
 With every new deployment the following action are taken:
 1. A new project and credentials are beeing created in the edge openshift
 2. A image mirror from the main docker registry to the edge are beeing created to sync automaticly your images to the edge
 3. A new Application is beeing created in the ArgoCD for syncing the infrastrucure code from your git repo
-
+![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image4.png?raw=true)
 ### 5. Sync the application to the edge and watch your deployment 
