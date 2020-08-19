@@ -32,4 +32,4 @@ With every new deployment the following action are taken:
 ![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image4.png?raw=true)
 ### 5. Sync the application to the edge and watch your deployment
 1.  Connect to the [argo](https://argocd-server-argocd.apps.ocp43-prod.cloudlet-dev.com/applications) with your crednitals (using the project name as user name and password) and click Sync to deploy the application to the edge
-![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image6.png?raw=true)
+![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image5.png?raw=true)
