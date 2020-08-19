@@ -30,4 +30,6 @@ With every new deployment the following action are taken:
 2. A image mirror from the main docker registry to the edge are beeing created to sync automaticly your images to the edge
 3. A new Application is beeing created in the ArgoCD for syncing the infrastrucure code from your git repo
 ![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image4.png?raw=true)
-### 5. Sync the application to the edge and watch your deployment 
+### 5. Sync the application to the edge and watch your deployment
+1.  Connect to the [argo](https://argocd-server-argocd.apps.ocp43-prod.cloudlet-dev.com/applications) with your crednitals (using the project name as user name and password) and click Sync to deploy the application to the edge
+![Alt text](https://github.com/yakirnadav/CloudletTemplates/blob/master/img/Image6.png?raw=true)
