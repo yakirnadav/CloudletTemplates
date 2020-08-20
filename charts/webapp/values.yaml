@@ -2,7 +2,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  name: helm-charts-template
+  name: webapp
   tag: latest
   pullPolicy: IfNotPresent 
   resources:
