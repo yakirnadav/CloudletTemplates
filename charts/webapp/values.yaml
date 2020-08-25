@@ -7,8 +7,8 @@ image:
   pullPolicy: IfNotPresent 
   resources:
     requests:
-      cpu: 
-      memory: 
+      cpu: 200m
+      memory: 300Mi
 service:
   type: NodePort
   servicePort: 3000
