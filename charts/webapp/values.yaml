@@ -12,5 +12,5 @@ image:
 service:
   type: NodePort
   servicePort: 3000
-  dns: nodejs-hello-world
+  dns: apptest
   tls: edge
