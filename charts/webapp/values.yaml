@@ -12,5 +12,5 @@ image:
 service:
   type: NodePort
   servicePort: 3000
-  dns: apptest
+  dns: apptest-2
   tls: edge
