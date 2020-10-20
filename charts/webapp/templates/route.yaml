@@ -6,6 +6,7 @@ metadata:
     chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
   annotations:
     argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: '-5'
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   host: "{{  .Values.service.dns }}.apps.{{ template "cluster_fqdn" . }}"
