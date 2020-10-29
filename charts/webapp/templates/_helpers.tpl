@@ -14,5 +14,5 @@
 
 
 {{- define "edge_registry" -}}
-{{ template "registry_dns"}}.{{ template "cluster_fqdn"}}
+{{ template "registry_dns" .}}.{{ template "cluster_fqdn" .}}
 {{- end -}}
