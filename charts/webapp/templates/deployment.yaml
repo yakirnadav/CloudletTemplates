@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: "{{  .Chart.Name  }}"
-        image: "quay.apps.prod.cloudlet-dev.com/helm-templates/webapp:{{ .Values.image.tag }}"
+        image: "{{ template "edge_registry" .}}/helm-templates/webapp:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.servicePort}}
