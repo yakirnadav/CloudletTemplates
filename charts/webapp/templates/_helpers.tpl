@@ -4,7 +4,7 @@
 {{- end -}}
 
 {{- define "registry_dns" -}}
-{{- $match | pritnf "quay.apps.%s" . -}}
+{{- $match | pritnf "quay.apps" -}}
 {{- end -}}
 
 {{- define "cluster_fqdn" -}}
