@@ -14,5 +14,5 @@
 
 
 {{- define "edge_registry" -}}
-{{ template "registry_dns" .}}.{{ template "cluster_fqdn" .}}
+{{- printf "quay.apps.%s" .cluster_fqdn }}
 {{- end -}}
