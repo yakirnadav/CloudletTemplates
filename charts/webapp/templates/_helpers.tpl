@@ -9,6 +9,7 @@
 {{- end -}}
 
 {{- define "edge_image" -}}
-{{- with .Values.image}}
-{{- printf "{\"%s\"} .name| regexMatch "\\[^\\]*$" | trimAll "\"}} 
+{{- with .Values.image -}}
+{{- printf "{\"%s\"} .name| regexMatch "\\[^\\]*$" | trimAll "\" -}} 
+{{- end -}}
 {{- end -}}
