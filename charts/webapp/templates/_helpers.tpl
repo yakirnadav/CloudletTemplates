@@ -7,9 +7,3 @@
 {{- $match := .Values.spec.destination.server | toString | regexFind "api.*:" -}}
 {{- $match | trimAll ":" | trimAll "api." -}}
 {{- end -}}
-
-{{- define "edge_image" -}}
-{{- with .Values.image -}}
-{{- printf "{\"%s\"} .name| regexMatch "\\[^\\]*$" -}} 
-{{- end -}}
-{{- end -}}
