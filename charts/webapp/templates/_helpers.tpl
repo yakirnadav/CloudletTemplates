@@ -10,6 +10,6 @@
 
 {{- define "edge_image" -}}
 {{- with .Values.image -}}
-{{- printf "{\"%s\"} .name| regexMatch "\\[^\\]*$" | trimAll "\" -}} 
+{{- printf "{\"%s\"} .name| regexMatch "\\[^\\]*$" -}} 
 {{- end -}}
 {{- end -}}
