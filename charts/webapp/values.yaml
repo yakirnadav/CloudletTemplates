@@ -2,7 +2,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  name: nodejs-hello-world
+  name: docker.io/yakir32/version2.2/nodejs-hello-world
   tag: "1.1"
   pullPolicy: IfNotPresent 
   resources:
